@@ -7,6 +7,7 @@ var express = require('express')
   , http = require('http')
   , path = require('path');
 var app = express();
+var expressValidators = require('express-validator');
 
 var passport = require('passport');
 var session      = require('express-session');
@@ -30,6 +31,7 @@ app.use(express.favicon());
 app.use(express.logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded());
+app.use(expressValidators());
 app.use(express.multipart());
 app.use(express.methodOverride());
 app.use(express.static(path.join(__dirname, 'public')));

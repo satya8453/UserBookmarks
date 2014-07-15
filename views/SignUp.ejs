@@ -5,6 +5,7 @@
 <title>SignUpDetails</title>
 </head>
 <body style="align-self: center">
+	<ul><% if(errors.length > 0) {for(var k=0;k<errors.length;k++){%><li><p><%=errors[k].msg%><%}}%></p></li></ul>
 	<form action="/register" method="post" >
 		<div
 			style="width: 200px; height: 230px; position: absolute; left: 0; right: 0; top: 0; bottom: 0; margin: auto;border: 2px solid blue;border-radius:5px;">

@@ -8,10 +8,14 @@ module.exports = function(app, passport) {
 
 	// Reigster New User Page============================
 	app.get('/signUp', function(req, res) {
-		res.render('SignUp.ejs');
+		res.render('SignUp.ejs',
+				{
+					errors : ""
+				});
 	});
 
 	app.get('/', function(req, res) {
+		console.log('fro index+++');
 		res.render('index.ejs');
 	});
 
@@ -35,7 +39,9 @@ module.exports = function(app, passport) {
 	});
 
 	app.get('/login', function(req, res) {
-		res.render('login.ejs');
+		res.render('login.ejs',{
+			errors : ""
+		});
 	});
 
 	app.get('/showbookmarks', function(req, res) {
@@ -47,7 +53,7 @@ module.exports = function(app, passport) {
 	// POST requests
 
 	// Register New User function ============
-	app.post('/register', passport.authenticate('local-signup', {
+	app.post('/register',signUpValidator, passport.authenticate('local-signup', {
 		successRedirect : '/welcome', // redirect to the secure profile
 										// section
 		failureRedirect : '/signup', // redirect back to the signup page if
@@ -78,7 +84,7 @@ module.exports = function(app, passport) {
 		console.log(req);
 	});
 
-	app.post('/login', passport.authenticate('local-login', {
+	app.post('/login',loginValidator, passport.authenticate('local-login', {
 		successRedirect : "/welcome",
 		failureRedirect : "/login",
 		failureFlash : true
@@ -98,4 +104,36 @@ function isLoggedIn(req, res, next) {
 		return next();
 
 	res.redirect('/');
+};
+
+function signUpValidator(req,res,next){
+	console.log('inside reg validator');
+	req.assert('name','Name is required').notEmpty();
+	req.assert('email','Email is required').notEmpty();
+	req.assert('email','invalid email id').isEmail();
+	req.assert('password','Passwrod is required').notEmpty();
+	
+	var errors = req.validationErrors();
+	if (errors){
+		res.render('SignUp.ejs',{
+			errors:errors
+		});}
+	else
+		return next();
+}
+
+
+function loginValidator(req,res,next){
+	console.log('inside reg validator');
+	req.assert('email','Email is required').notEmpty();
+	req.assert('email','invalid email id').isEmail();
+	req.assert('password','Passwrod is required').notEmpty();
+	
+	var errors = req.validationErrors();
+	if (errors){
+		res.render('login.ejs',{
+			errors:errors
+		});}
+	else
+		return next();
 }
