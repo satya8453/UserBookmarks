@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+<title>SignUpDetails</title>
+</head>
+<body style="align-self: center">
+	<ul>
+		<% if(errors.name) {%><li><p><%=errors.name.msg%><%}%></p></li>
+		<% if(errors.email) {%><li><p><%=errors.email.msg%><%}%></p></li>
+		<% if(errors.password) {%><li><p><%=errors.password.msg%><%}%></p></li>
+		<% if(errors.signup) { if(errors.signup.length>0) {%><li><p><%=errors.signup%><%}}%></p></li>
+	</ul>
+	<form action="/register" method="post" >
+		<div
+			style="width: 200px; height: 230px; position: absolute; left: 0; right: 0; top: 0; bottom: 0; margin: auto;border: 2px solid blue;border-radius:5px;">
+			<div
+				style="text-align: center; border-radius: 5px;margin-top:30px;display:inline-block; ">
+				&nbsp;&nbsp;Name<input type="text" name="name" style="width:100px;margin-left:43px;"  />
+			</div>
+	
+			<div
+				style="text-align: center; border-radius: 5px;margin-top: 40px;display:inline-block;">
+				&nbsp;&nbsp;EmailId<input type="text" name="email" style="width:100px;margin-left:34px;"/>
+			</div>
+			
+			<div
+				style="text-align: center; border-radius: 5px;margin-top: 40px;display:inline-block;">
+				&nbsp;&nbsp;Password<input type="password" name="password" style="width:100px;margin-left:20px;"/>
+			</div>
+			<div style="margin-top:20px;">
+				<input type="submit" value="Register" style="position: relative;height: 30px;left: 60px;">
+			</div>
+		</div>
+	</form>
+	<p>Already Registered? <a href="/login" style="text-decoration: none;">Login here</a></p>
+</body>
+</html>
