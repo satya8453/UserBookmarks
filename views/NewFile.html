@@ -2,24 +2,24 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>ShowMarks</title>
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+<link rel="stylesheet" href="/stylesheets/style.css" />
+<title>FirstVisit</title>
 </head>
-<body style="align-self: center">
-		<div
-			style="width: 200px; height: 230px; position: absolute; left: 0; right: 0; top: 0; bottom: 0; margin: auto;border: 2px solid lightcoral;border-radius:5px;">
-			<div
-				style="text-align: center; border-radius: 5px;margin-top:30px;display:inline-block; ">
-				&nbsp;&nbsp;Link<div style="width:100px;margin-left:10px;"> <%=userd.bookmarks.link %> </div>
-			</div>
-	
-			<div
-				style="text-align: center; border-radius: 5px;margin-top: 40px;display:inline-block;">
-				&nbsp;&nbsp;Tags<div style="width:100px;margin-left:10px;"> <%=userd.bookmarks.tags %></div>
-			</div>
-			
-			<div style="margin-top:20px;">
-				<input type="submit" value="Add Tag" style="position: relative;height: 30px;left: 60px;">
-			</div>
+<body>
+	<div 
+		style="width: 100px; height: 100px; position: absolute; left: 0; right: 0; top: 0; bottom: 0; margin: auto;">
+		<div>
+			<a style="text-decoration: none;" class="btn btn-primary" href="/login" type="button">Login</a>
 		</div>
+
+		<div style="margin-top:40px;">
+			<a style="text-decoration: none;" class="btn btn-primary" href="/signUp" type="button">Register</a>
+		</div>
+	</div>
 </body>
 </html>
