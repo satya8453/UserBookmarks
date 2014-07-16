@@ -2,10 +2,19 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
 <title>Login</title>
 </head>
 <body style="align-self: center">
-	<ul><% if(errors.length > 0) {for(var k=0;k<errors.length;k++){%><li><p><%=errors[k].msg%><%}}%></p></li></ul>
+	<ul>
+		<% if(errors.email) {%><li><p><%=errors.email.msg%><%}%></p></li>
+		<% if(errors.password) {%><li><p><%=errors.password.msg%><%}%></p></li>
+		<% if(errors.login.length>0) {%><li><p><%=errors.login%><%}%></p></li>
+	</ul>
 	<form action="/login" method="post" >
 		<div
 			style="width: 200px; height: 230px; position: absolute; left: 0; right: 0; top: 0; bottom: 0; margin: auto;border: 2px solid blue;border-radius:5px;">
@@ -20,9 +29,10 @@
 			</div>
 			
 			<div style="margin-top:20px;">
-				<input type="submit" value="Add Tag" style="position: relative;height: 30px;left: 60px;">
+				<input type="submit" value="Login" style="position: relative;height: 30px;left: 60px;">
 			</div>
 		</div>
 	</form>
+	<p>New User?<a href="/signup" style="text-decoration:none;"> Register </a></p>
 </body>
 </html>

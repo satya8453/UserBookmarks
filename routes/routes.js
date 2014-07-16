@@ -8,9 +8,10 @@ module.exports = function(app, passport) {
 
 	// Reigster New User Page============================
 	app.get('/signUp', function(req, res) {
-		res.render('SignUp.ejs',
+		console.log('called');
+		res.render('signUp.ejs',
 				{
-					errors : ""
+			errors :{ signup : req.flash('signupMessage')}
 				});
 	});
 
@@ -26,21 +27,20 @@ module.exports = function(app, passport) {
 	app.get('/addbookmarks', isLoggedIn, function(req, res) {
 		console.log(req.user.userDetails.email + " "
 				+ req.user.userDetails.password + " addbook");
-		res.render('Add_Bookmark.ejs', {
-			email : req.email,
-			password : req.password
-		});
+		res.render('add_Bookmark.ejs');
 	});
 
 	// LOGOUT ==============================
 	app.get('/logout', function(req, res) {
 		req.logout();
-		res.redirect('/');
+		res.render('login.ejs',{
+			errors :{ login : "Logged out successfully. Log in again"}
+		});
 	});
 
 	app.get('/login', function(req, res) {
 		res.render('login.ejs',{
-			errors : ""
+			errors :{ login : req.flash('loginMessage')}
 		});
 	});
 
@@ -63,7 +63,7 @@ module.exports = function(app, passport) {
 	}));
 
 	app.post('/addlink', isLoggedIn, function(req, res) {
-		console.log("insied add link" + req.body.link + " " + req.body.tags);
+		console.log("inside add link" + req.body.link + " " + req.body.tags);
 		User.update({
 			'userDetails.email' : req.user.userDetails.email
 		}, {
@@ -109,13 +109,13 @@ function isLoggedIn(req, res, next) {
 function signUpValidator(req,res,next){
 	console.log('inside reg validator');
 	req.assert('name','Name is required').notEmpty();
-	req.assert('email','Email is required').notEmpty();
 	req.assert('email','invalid email id').isEmail();
+	req.assert('email','Email is required').notEmpty();
 	req.assert('password','Passwrod is required').notEmpty();
 	
-	var errors = req.validationErrors();
+	var errors = req.validationErrors(true);
 	if (errors){
-		res.render('SignUp.ejs',{
+		res.render('signUp.ejs',{
 			errors:errors
 		});}
 	else
@@ -125,11 +125,11 @@ function signUpValidator(req,res,next){
 
 function loginValidator(req,res,next){
 	console.log('inside reg validator');
-	req.assert('email','Email is required').notEmpty();
-	req.assert('email','invalid email id').isEmail();
-	req.assert('password','Passwrod is required').notEmpty();
+	req.checkBody('email','Invalid Email').isEmail();
+	req.checkBody('email','Email is required').notEmpty();
+	req.checkBody('password','Passwrod is required').notEmpty();
 	
-	var errors = req.validationErrors();
+	var errors = req.validationErrors(true);
 	if (errors){
 		res.render('login.ejs',{
 			errors:errors

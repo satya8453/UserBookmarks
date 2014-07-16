@@ -31,9 +31,9 @@ app.use(express.favicon());
 app.use(express.logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded());
-app.use(expressValidators());
 app.use(express.multipart());
 app.use(express.methodOverride());
+app.use(expressValidators());
 app.use(express.static(path.join(__dirname, 'public')));
 
 //required for passport
@@ -51,23 +51,6 @@ require('./routes/routes.js')(app, passport); // load our routes and pass in our
 if ('development' == app.get('env')) {
   app.use(express.errorHandler());
 }
-
-
-
-/*app.post("/register",function(req,res){
-	var user=new User();
-	user.userDetails.name = req.body.name;
-	user.userDetails.email = req.body.email;
-	user.userDetails.password = user.generateHash(req.body.password);
-	console.log(user);
-	user.save(function(err,user) {
-          if (err){
-              console.log(err);
-              res.render('SignUp.ejs');
-          }
-      });
-	console.log(user);
-});*/
 
 
 http.createServer(app).listen(app.get('port'), function(){

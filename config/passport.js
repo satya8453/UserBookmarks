@@ -125,22 +125,4 @@ module.exports = function(passport) {
 
     }));
 
-    //ADD BOOKMARKS WITH TAGS===========================================================================================
-    passport.use('local-addlink', new LocalStrategy({
-        // by default, local strategy uses username and password, we will override with email
-        usernameField : 'email',
-        passwordField : 'password',
-        passReqToCallback : true // allows us to pass in the req from our route (lets us check if a user is logged in or not)
-    },
-    function(req, email, password, done) {
-    	console.log(req.link+" "+req.tags);
-			User.update({'userDetails.email':email},{'bookmarks' : {'link' : req.link,'tags' : req.tags}},function (err, numberAffected,raw){
-				if (err){
-					throw err;
-				}
-				console.log("done dealsss "+numberAffected);
-			});
-		console.log(req);
-		return done(null, req.user);
-    }));
 };    
