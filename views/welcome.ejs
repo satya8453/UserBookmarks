@@ -10,19 +10,19 @@
 <link rel="stylesheet" href="/stylesheets/style.css" />
 <title>Welcome</title>
 </head>
-<h3>Welcome <%=username.name%></h3>
+<h3>Welcome <%=name%></h3>
+	<a href="/logout" class="btn btn-warning logout" style="margin-top:-31px">Logout</a>
 <body style="align-self: center">
-	<a href="/logout" style="text-decoration:none;float:right;" class="btn btn-danger"><div>Logout</div></a>
 		<div id="indxbox">
 		
 			<div 
 				style="text-align: center;margin-top:30px; ">
-				<a href="/showbookmarks" class="btn btn-warning" style="text-decoration:none;">My Bookmarks</a>
+				<a href="/showbookmarks" class="btn btn-default" style="text-decoration:none;">My Bookmarks</a>
 			</div>
 	
 			<div 
 				style="text-align: center; margin-top: 40px;">
-				<a href="/addbookmarks" class="btn btn-warning" style="text-decoration:none;">Add Bookmarks</a>
+				<a href="/addbookmarks" class="btn btn-default" style="text-decoration:none;">Add Bookmarks</a>
 			</div>
 			
 		</div>

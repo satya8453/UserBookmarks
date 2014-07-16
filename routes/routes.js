@@ -21,10 +21,10 @@ module.exports = function(app, passport) {
 	});
 
 	app.get('/welcome', function(req, res) {
-		console.log("reqis "+req.user.userDetails);
-		var names = req.user.userDetails
+		/*console.log("reqis "+req.user.userDetails);
+		var names = req.user.userDetails*/
 		res.render('welcome.ejs',{
-			username: names
+			name : req.user.userDetails.name
 		});
 	});
 
