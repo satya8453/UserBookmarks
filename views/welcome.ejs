@@ -2,19 +2,27 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+<link rel="stylesheet" href="/stylesheets/style.css" />
 <title>Welcome</title>
 </head>
+<h3>Welcome <%=username.name%></h3>
 <body style="align-self: center">
-		<div
-			style="width: 200px; height: 230px; position: absolute; left: 0; right: 0; top: 0; bottom: 0; margin: auto;border: 2px solid blue;border-radius:5px;">
-			<div
-				style="text-align: center; border-radius: 5px;margin-top:30px;display:inline-block; ">
-				<a href="/showbookmarks">My Bookmarks</a>
+	<a href="/logout" style="text-decoration:none;float:right;" class="btn btn-danger"><div>Logout</div></a>
+		<div id="indxbox">
+		
+			<div 
+				style="text-align: center;margin-top:30px; ">
+				<a href="/showbookmarks" class="btn btn-warning" style="text-decoration:none;">My Bookmarks</a>
 			</div>
 	
-			<div
-				style="text-align: center; border-radius: 5px;margin-top: 40px;display:inline-block;">
-				<a href="/addbookmarks">Add Bookmarks</a>
+			<div 
+				style="text-align: center; margin-top: 40px;">
+				<a href="/addbookmarks" class="btn btn-warning" style="text-decoration:none;">Add Bookmarks</a>
 			</div>
 			
 		</div>

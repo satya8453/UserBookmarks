@@ -2,27 +2,32 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+<link rel="stylesheet" href="/stylesheets/style.css" />
 <title>ShowMarks</title>
 </head>
 <body style="align-self: center">
-		<div
-			style="width: 500px; height: 500px; position: absolute; left: 0; right: 0; top: 0; bottom: 0; margin: auto;border: 2px solid blue;border-radius:5px;">
-			<div
-				style="text-align: center; border-radius: 5px;margin-top:30px;display:inline-block; ">
-				&nbsp;&nbsp;Link<div style="width:100px;margin-left:10px;"> <%for (var i=0;i<userd.bookmarks.length;i++) {%><div><%=userd.bookmarks[i].link %></div><%}%> </div>
-			</div>
-	
-			<div
-				style="text-align: center; border-radius: 5px;margin-top: 40px;display:inline-block;">
-				&nbsp;&nbsp;Tags<div style="width:100px;margin-left:10px;"> <%for (var i=0;i<userd.bookmarks.length;i++) {%><div><%
-	for(var j=0;j<userd.bookmarks[i].tags.length;j++){%><%=userd.bookmarks[i].tags[j]%><%}%></div><%}%></div>
-			</div>
-			
-			<a href="/addbookmarks">
-			<div style="margin-top:20px;">
-				<input type="button" value="Add Bookmarks" style="position: relative;height: 30px;left: 60px;">
-			</div>
-			</a>
+	<a href="/addbookmarks" class="btn btn-warning otherlink">Add Bookmarks</a><a class="btn btn-warning logout" href="/logout">Logout</a>
+		<div class="panel panel-default panelstyle" >
+			<div class="panel-body">
+			<table class="table">
+				<thead>
+					<tr>
+						<td>Link</td>
+						<td>Tags</td>
+					</tr>
+				</thead>
+				<tbody>
+					 <%for (var i=0;i<userd.bookmarks.length;i++) {%><tr><td><%=userd.bookmarks[i].link %></td> 
+					<td><%for(var j=0;j<userd.bookmarks[i].tags.length;j++){%><%=userd.bookmarks[i].tags[j]%><%}%></td><%}%></tr>
+				</tbody>
+			</table>
+		
 		</div>
 </body>
 </html>
