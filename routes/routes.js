@@ -29,9 +29,12 @@ module.exports = function(app, passport) {
 	});
 
 	app.get('/addbookmarks', isLoggedIn, function(req, res) {
-		console.log(req.user.userDetails.email + " "
-				+ req.user.userDetails.password + " addbook");
-		res.render('add_Bookmark.ejs');
+//		console.log(req.user.userDetails.email + " "
+//				+ req.user.userDetails.password + " addbook");
+		var error="";
+		res.render('add_Bookmark.ejs',{
+			vald:error
+		});
 	});
 
 	// LOGOUT ==============================
@@ -69,14 +72,14 @@ module.exports = function(app, passport) {
 	// allow flash messages
 	}));
 
-	app.post('/addlink', isLoggedIn, function(req, res) {
-		console.log("inside add link" + req.body.link + " " + req.body.tags);
+	app.post('/addlink', isLoggedIn,bokmarksValidator, function(req, res) {
+		console.log("inside add link" + req.body.bookmarklink + " " + req.body.tags);
 		User.update({
 			'userDetails.email' : req.user.userDetails.email
 		}, {
 			$push : {
 				'bookmarks' :  {
-					'link' : req.body.link,
+					'link' : req.body.bookmarklink,
 					'tags' : req.body.tags
 				} 
 			}
@@ -88,7 +91,7 @@ module.exports = function(app, passport) {
 			// console.log("done dealsss "+numberAffected);
 			res.redirect("/showbookmarks");
 		});
-		console.log(req);
+		//console.log(req);
 	});
 
 	app.post('/login',loginValidator, passport.authenticate('local-login', {
@@ -98,15 +101,15 @@ module.exports = function(app, passport) {
 	}));
 
 	app.get("/error_in_add", function(req, res) {
-		console.log("inside error console " + req);
-		console.log(req.err);
+		//console.log("inside error console " + req);
+		//console.log(req.err);
 		res.render('welcome.ejs');
 	});
 };
 
 // route middleware to ensure user is logged in
 function isLoggedIn(req, res, next) {
-	console.log("authenticated " + req.user.userDetails.email);
+	//console.log("authenticated " + req.user.userDetails.email);
 	if (req.isAuthenticated())
 		return next();
 
@@ -131,7 +134,7 @@ function signUpValidator(req,res,next){
 
 
 function loginValidator(req,res,next){
-	console.log('inside reg validator');
+	console.log('inside login validator');
 	req.checkBody('email','Invalid Email').isEmail();
 	req.checkBody('email','Email is required').notEmpty();
 	req.checkBody('password','Passwrod is required').notEmpty();
@@ -140,6 +143,21 @@ function loginValidator(req,res,next){
 	if (errors){
 		res.render('login.ejs',{
 			errors:errors
+		});}
+	else
+		return next();
+}
+
+
+function bokmarksValidator(req,res,next){
+	console.log("inside bookmarks validator "+req.body.link+" "+req.body.tags);
+	req.checkBody('bookmarklink','Link cannot be empty').notEmpty();
+	req.checkBody('tags','Tags cannot be empty').notEmpty();
+	var errors = req.validationErrors(true);
+	console.log(errors);
+	if (errors){
+		res.render('add_bookmark.ejs',{
+			vald:errors
 		});}
 	else
 		return next();
