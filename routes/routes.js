@@ -32,7 +32,7 @@ module.exports = function(app, passport) {
 //		console.log(req.user.userDetails.email + " "
 //				+ req.user.userDetails.password + " addbook");
 		var error="";
-		res.render('add_Bookmark.ejs',{
+		res.render('add_bookmark.ejs',{
 			vald:error
 		});
 	});
